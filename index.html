@@ -109,7 +109,7 @@
         </div>
 
         <!-- Cart & Checkout Right Column -->
-        <div>
+        <div id="posCartPanel">
           <div class="card cart-panel">
             <div class="card-header">
               <div class="card-title">
@@ -161,6 +161,17 @@
               ✅ Complete Sale & Print Receipt
             </button>
           </div>
+        </div>
+      </div>
+
+      <!-- Mobile Floating Quick Cart Button -->
+      <div class="mobile-cart-bar" id="mobileCartBar" onclick="window.posService.scrollToCart()" style="display:none;">
+        <div class="mobile-cart-summary">
+          <span class="mobile-cart-icon">🛒</span>
+          <span id="mobileCartSummaryText">0 items • ₵0.00</span>
+        </div>
+        <div class="mobile-cart-action">
+          <span>Checkout</span> ➔
         </div>
       </div>
     </section>

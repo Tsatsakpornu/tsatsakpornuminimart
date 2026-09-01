@@ -329,6 +329,8 @@ class PosService {
     const listContainer = document.getElementById('posCartList');
     const totalQtyEl = document.getElementById('posCartTotalQty');
     const totalAmountEl = document.getElementById('posCartTotalAmount');
+    const mobileCartBar = document.getElementById('mobileCartBar');
+    const mobileCartSummary = document.getElementById('mobileCartSummaryText');
 
     if (!listContainer) return;
 
@@ -342,6 +344,7 @@ class PosService {
       `;
       if (totalQtyEl) totalQtyEl.textContent = '0 items';
       if (totalAmountEl) totalAmountEl.textContent = '₵0.00';
+      if (mobileCartBar) mobileCartBar.style.display = 'none';
       return;
     }
 
@@ -365,6 +368,19 @@ class PosService {
     const totals = this.getCartTotals();
     if (totalQtyEl) totalQtyEl.textContent = `${totals.totalQty} item${totals.totalQty > 1 ? 's' : ''}`;
     if (totalAmountEl) totalAmountEl.textContent = `₵${totals.totalRevenue.toFixed(2)}`;
+
+    // Update Mobile Quick Cart Bar
+    if (mobileCartBar && mobileCartSummary) {
+      mobileCartBar.style.display = 'flex';
+      mobileCartSummary.textContent = `${totals.totalQty} item${totals.totalQty > 1 ? 's' : ''} • ₵${totals.totalRevenue.toFixed(2)}`;
+    }
+  }
+
+  scrollToCart() {
+    const cartEl = document.getElementById('posCartPanel');
+    if (cartEl) {
+      cartEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   async renderMyShiftSales() {

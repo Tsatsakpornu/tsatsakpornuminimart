@@ -27,6 +27,14 @@ class AppController {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') this.closeModal();
     });
+
+    // Close mobile nav when clicking outside header
+    document.addEventListener('click', (e) => {
+      if (this.mobileNavOpen && !e.target.closest('#appHeader')) {
+        this.mobileNavOpen = false;
+        this.updateMobileNav();
+      }
+    });
   }
 
   updateCloudStatusBadge(status) {

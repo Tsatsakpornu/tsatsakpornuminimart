@@ -1,5 +1,5 @@
 /* ==============================================================================
-   TSATSAKPORNU POS & RETAIL MANAGEMENT SYSTEM - DESIGN SYSTEM & STYLES
+   TSATSAKPORNU POS & RETAIL MANAGEMENT SYSTEM - MOBILE RESPONSIVE DESIGN SYSTEM
    ============================================================================== */
 
 :root {
@@ -54,22 +54,28 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background-color: var(--bg);
   color: var(--ink);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 14.5px;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--ink);
@@ -86,6 +92,7 @@ button {
   border: none;
   background: none;
   transition: var(--transition);
+  touch-action: manipulation;
 }
 
 input, select, textarea {
@@ -107,12 +114,12 @@ input, select, textarea {
 }
 
 /* ==============================================================================
-   APP HEADER & NAVIGATION
+   APP HEADER & RESPONSIVE NAVIGATION
    ============================================================================== */
 .app-header {
   background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
   color: #FFFFFF;
-  padding: 12px 24px 0;
+  padding: 12px 20px 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -123,19 +130,20 @@ input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   padding-bottom: 12px;
 }
 
 .brand-section {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  min-width: 0;
 }
 
 .brand-logo {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -143,76 +151,55 @@ input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 19px;
+  flex-shrink: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.brand-info {
+  min-width: 0;
+}
+
 .brand-info h1 {
-  font-size: 18px;
+  font-size: 17px;
   color: #FFFFFF;
   line-height: 1.2;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .brand-info .tagline {
-  font-size: 11px;
+  font-size: 10.5px;
   color: rgba(255, 255, 255, 0.75);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.status-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
-  border-radius: var(--radius-full);
-  font-size: 11.5px;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #FFFFFF;
-  cursor: pointer;
-  transition: var(--transition);
-}
-.status-chip:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 8px #10B981;
-}
-.status-dot.offline {
-  background: #F59E0B;
-  box-shadow: 0 0 8px #F59E0B;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .user-badge {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 5px 12px 5px 6px;
+  gap: 8px;
+  padding: 4px 10px 4px 5px;
   background: rgba(0, 0, 0, 0.22);
   border-radius: var(--radius-full);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .user-avatar {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--accent);
   color: #FFFFFF;
@@ -220,7 +207,8 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
+  flex-shrink: 0;
 }
 
 .user-meta {
@@ -229,14 +217,18 @@ input, select, textarea {
 }
 
 .user-name {
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 700;
   color: #FFFFFF;
   line-height: 1.2;
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .user-role-tag {
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -260,13 +252,13 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   font-size: 16px;
+  flex-shrink: 0;
 }
 .btn-header-icon:hover {
   background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
 }
 
-/* Mobile Hamburger Menu Button */
+/* Hamburger toggle button */
 .mobile-menu-btn {
   display: none;
 }
@@ -274,8 +266,10 @@ input, select, textarea {
 .hamburger-icon {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 4px;
-  width: 20px;
+  width: 18px;
+  height: 16px;
 }
 .hamburger-icon span {
   display: block;
@@ -290,7 +284,6 @@ input, select, textarea {
 }
 .mobile-menu-btn.active .hamburger-icon span:nth-child(2) {
   opacity: 0;
-  transform: scaleX(0);
 }
 .mobile-menu-btn.active .hamburger-icon span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
@@ -299,62 +292,66 @@ input, select, textarea {
 /* Nav Tabs */
 .nav-tabs {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   overflow-x: auto;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
+  -webkit-overflow-scrolling: touch;
 }
 
 .nav-tab-btn {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 16px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 13.5px;
+  padding: 11px 14px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
   font-weight: 600;
   border-bottom: 3px solid transparent;
   white-space: nowrap;
   transition: var(--transition);
+  flex-shrink: 0;
 }
 .nav-tab-btn:hover {
   color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
 }
 .nav-tab-btn.active {
   color: #FFFFFF;
   border-bottom-color: var(--accent);
-  background: rgba(255, 255, 255, 0.1);
-}
-.nav-tab-btn .tab-badge {
-  background: var(--accent);
-  color: #3A2A05;
-  font-size: 10.5px;
-  font-weight: 800;
-  padding: 2px 7px;
-  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 /* ==============================================================================
-   MAIN LAYOUT & CONTAINERS
+   MAIN LAYOUT
    ============================================================================== */
 .app-main {
   flex: 1;
   max-width: 1360px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px 20px 60px;
+  padding: 20px 16px 60px;
 }
 
 .view-panel {
   display: none;
-  animation: fadeIn 0.25s ease-out;
+  animation: fadeIn 0.22s ease-out;
 }
 .view-panel.active {
   display: block;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -365,11 +362,11 @@ input, select, textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 18px;
+  gap: 6px;
+  padding: 9px 16px;
   border-radius: var(--radius-md);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13.5px;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
 }
@@ -424,14 +421,14 @@ input, select, textarea {
 }
 
 .btn-sm {
-  padding: 6px 12px;
-  font-size: 12.5px;
+  padding: 6px 11px;
+  font-size: 12px;
   border-radius: var(--radius-sm);
 }
 
 .btn-lg {
-  padding: 14px 24px;
-  font-size: 15.5px;
+  padding: 13px 20px;
+  font-size: 15px;
   font-weight: 700;
   border-radius: var(--radius-md);
 }
@@ -444,9 +441,9 @@ input, select, textarea {
   background: var(--surface-card);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 18px;
   box-shadow: var(--shadow-sm);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   position: relative;
 }
 
@@ -454,13 +451,13 @@ input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
-  gap: 12px;
+  margin-bottom: 16px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .card-title {
-  font-size: 17px;
+  font-size: 16px;
   color: var(--ink);
   display: flex;
   align-items: center;
@@ -468,30 +465,31 @@ input, select, textarea {
 }
 
 .card-subtitle {
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 2px;
   font-weight: 400;
 }
 
 .field {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 .field label {
   display: block;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--ink-soft);
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 .field input, .field select, .field textarea {
   width: 100%;
-  padding: 11px 14px;
+  padding: 10px 12px;
   border-radius: var(--radius-md);
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--ink);
   outline: none;
+  font-size: 13.5px;
   transition: var(--transition);
 }
 .field input:focus, .field select:focus, .field textarea:focus {
@@ -499,19 +497,19 @@ input, select, textarea {
   box-shadow: 0 0 0 3px var(--primary-tint);
 }
 .field .hint {
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--muted);
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 .search-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  padding: 10px 14px;
+  padding: 9px 12px;
   transition: var(--transition);
 }
 .search-bar:focus-within {
@@ -523,7 +521,7 @@ input, select, textarea {
   outline: none;
   background: transparent;
   width: 100%;
-  font-size: 14px;
+  font-size: 13.5px;
 }
 
 /* Badges */
@@ -531,12 +529,13 @@ input, select, textarea {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 3px 10px;
+  padding: 3px 9px;
   border-radius: var(--radius-full);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 .badge-admin {
   background: #EDE9FE;
@@ -573,45 +572,45 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 16px;
 }
 
 .auth-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 36px 32px;
+  padding: 32px 24px;
   box-shadow: var(--shadow-lg);
   width: 100%;
-  max-width: 440px;
+  max-width: 420px;
 }
 
 .auth-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .auth-icon {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   background: var(--primary-tint);
   color: var(--primary);
-  border-radius: 16px;
+  border-radius: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
-  margin-bottom: 12px;
+  font-size: 26px;
+  margin-bottom: 10px;
   box-shadow: 0 4px 12px var(--primary-glow);
 }
 
 .auth-header h2 {
-  font-size: 22px;
-  margin-bottom: 6px;
+  font-size: 20px;
+  margin-bottom: 4px;
 }
 .auth-header p {
   color: var(--muted);
-  font-size: 13.5px;
+  font-size: 13px;
 }
 
 /* ==============================================================================
@@ -620,21 +619,21 @@ input, select, textarea {
 .pos-layout {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  gap: 20px;
+  gap: 16px;
   align-items: start;
 }
 
 .category-pills {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   overflow-x: auto;
-  padding-bottom: 6px;
-  margin-bottom: 14px;
+  padding-bottom: 4px;
+  margin-bottom: 12px;
   -webkit-overflow-scrolling: touch;
 }
 
 .cat-pill {
-  padding: 6px 14px;
+  padding: 6px 13px;
   border-radius: var(--radius-full);
   background: var(--surface);
   border: 1px solid var(--line);
@@ -657,18 +656,18 @@ input, select, textarea {
 
 .pos-product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
   max-height: 60vh;
   overflow-y: auto;
-  padding-right: 4px;
+  padding-right: 2px;
 }
 
 .pos-item-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  padding: 14px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -688,30 +687,30 @@ input, select, textarea {
   background: var(--surface-alt);
 }
 .pos-item-card .item-cat {
-  font-size: 10px;
+  font-size: 9.5px;
   text-transform: uppercase;
   color: var(--muted);
   font-weight: 700;
   letter-spacing: 0.05em;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 .pos-item-card .item-name {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--ink);
   line-height: 1.3;
-  margin-bottom: 8px;
-  min-height: 36px;
+  margin-bottom: 6px;
+  min-height: 34px;
 }
 .pos-item-card .item-price {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--primary);
 }
 .pos-item-card .item-stock {
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--muted);
-  margin-top: 4px;
+  margin-top: 3px;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -724,17 +723,17 @@ input, select, textarea {
 }
 
 .cart-items-list {
-  max-height: 38vh;
+  max-height: 36vh;
   overflow-y: auto;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .cart-item-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  padding: 10px 0;
+  gap: 8px;
+  padding: 8px 0;
   border-bottom: 1px dashed var(--line);
 }
 
@@ -743,7 +742,7 @@ input, select, textarea {
   min-width: 0;
 }
 .cart-item-info .title {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--ink);
   overflow: hidden;
@@ -751,14 +750,14 @@ input, select, textarea {
   white-space: nowrap;
 }
 .cart-item-info .sub {
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--muted);
 }
 
 .cart-qty-ctrls {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   flex-shrink: 0;
 }
 .cart-qty-btn {
@@ -778,17 +777,17 @@ input, select, textarea {
   border-color: var(--primary);
 }
 .cart-qty-val {
-  min-width: 24px;
+  min-width: 20px;
   text-align: center;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12.5px;
 }
 
 .cart-item-subtotal {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--ink);
-  min-width: 65px;
+  min-width: 60px;
   text-align: right;
   flex-shrink: 0;
 }
@@ -796,8 +795,8 @@ input, select, textarea {
 .cart-summary {
   background: var(--surface-alt);
   border-radius: var(--radius-md);
-  padding: 14px;
-  margin-bottom: 16px;
+  padding: 12px;
+  margin-bottom: 14px;
   border: 1px solid var(--line);
 }
 
@@ -805,38 +804,38 @@ input, select, textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--ink-soft);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .summary-row.total {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
   color: var(--primary);
-  margin-top: 10px;
-  padding-top: 10px;
+  margin-top: 8px;
+  padding-top: 8px;
   border-top: 2px solid var(--line);
 }
 
 .payment-methods {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 14px;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
 .pay-btn {
-  padding: 10px 6px;
+  padding: 9px 4px;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--surface);
   text-align: center;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   transition: var(--transition);
 }
 .pay-btn:hover {
@@ -849,21 +848,65 @@ input, select, textarea {
   font-weight: 700;
 }
 
+/* Mobile Floating Cart Summary Bar */
+.mobile-cart-bar {
+  display: none;
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: var(--ink);
+  color: #FFFFFF;
+  padding: 12px 18px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  z-index: 90;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  animation: slideUp 0.25s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.mobile-cart-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 13.5px;
+}
+
+.mobile-cart-icon {
+  font-size: 17px;
+}
+
+.mobile-cart-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+  font-size: 12.5px;
+  color: var(--accent);
+  background: rgba(217, 119, 6, 0.18);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+}
+
 /* ==============================================================================
    ADMIN METRICS & PROFIT DASHBOARD
    ============================================================================== */
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
 .metric-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 16px;
   box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
@@ -888,23 +931,23 @@ input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .metric-title {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--muted);
 }
 .metric-icon {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
 }
 .metric-card.profit .metric-icon { background: var(--profit-tint); color: var(--profit); }
 .metric-card.revenue .metric-icon { background: var(--primary-tint); color: var(--primary); }
@@ -912,10 +955,10 @@ input, select, textarea {
 .metric-card.orders .metric-icon { background: var(--info-tint); color: var(--info); }
 
 .metric-value {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
   color: var(--ink);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   font-family: 'JetBrains Mono', monospace;
   word-break: break-all;
 }
@@ -924,7 +967,7 @@ input, select, textarea {
 }
 
 .metric-footer {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--muted);
   display: flex;
   align-items: center;
@@ -934,18 +977,18 @@ input, select, textarea {
 .profit-badge {
   background: var(--profit-tint);
   color: #065F46;
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: var(--radius-full);
   font-weight: 700;
-  font-size: 11.5px;
+  font-size: 11px;
 }
 
 /* Charts Grid */
 .charts-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 20px;
-  margin-bottom: 24px;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
 .chart-card {
@@ -958,24 +1001,26 @@ input, select, textarea {
 }
 
 /* ==============================================================================
-   TABLES (Salesperson Performance, Inventory, Sales Audit)
+   TABLES & RESPONSIVE DATA WRAPPERS
    ============================================================================== */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-sm);
 }
 
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13.5px;
+  font-size: 13px;
   text-align: left;
+  min-width: 600px;
 }
 
 .data-table th {
-  padding: 12px 14px;
-  font-size: 11px;
+  padding: 10px 12px;
+  font-size: 10.5px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -986,7 +1031,7 @@ input, select, textarea {
 }
 
 .data-table td {
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-bottom: 1px solid var(--line);
   vertical-align: middle;
 }
@@ -996,8 +1041,8 @@ input, select, textarea {
 }
 
 .rank-badge {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--surface-alt);
   border: 1px solid var(--line);
@@ -1005,7 +1050,7 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--ink-soft);
 }
 .rank-badge.top-1 { background: #FEF3C7; color: #B45309; border-color: #FDE68A; }
@@ -1015,11 +1060,11 @@ input, select, textarea {
 .salesperson-cell {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 .salesperson-avatar {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--primary-tint);
   color: var(--primary);
@@ -1027,7 +1072,7 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 11.5px;
   flex-shrink: 0;
 }
 
@@ -1036,19 +1081,19 @@ input, select, textarea {
   background: var(--surface-alt);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  padding: 12px;
+  padding: 10px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 4px;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 .margin-calc-val {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
   color: var(--profit);
-  font-size: 15px;
+  font-size: 14px;
 }
 
 /* ==============================================================================
@@ -1057,12 +1102,12 @@ input, select, textarea {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(17, 29, 21, 0.6);
+  background: rgba(17, 29, 21, 0.65);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 16px;
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
@@ -1076,13 +1121,13 @@ input, select, textarea {
 .modal-content {
   background: var(--surface);
   border-radius: var(--radius-lg);
-  max-width: 580px;
+  max-width: 560px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  padding: 24px;
+  padding: 22px;
   box-shadow: var(--shadow-float);
-  transform: scale(0.95);
+  transform: scale(0.96);
   transition: var(--transition);
 }
 .modal-overlay.show .modal-content {
@@ -1093,18 +1138,18 @@ input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .modal-close {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: var(--surface-alt);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--muted);
   flex-shrink: 0;
 }
@@ -1117,12 +1162,12 @@ input, select, textarea {
 .receipt-paper {
   background: #FFFFFF;
   border: 1px solid var(--line);
-  padding: 24px 20px;
+  padding: 20px 16px;
   border-radius: var(--radius-md);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12.5px;
+  font-size: 12px;
   color: #000000;
-  max-width: 360px;
+  max-width: 340px;
   margin: 0 auto;
   box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
 }
@@ -1130,11 +1175,11 @@ input, select, textarea {
 .receipt-header {
   text-align: center;
   border-bottom: 1px dashed #000;
-  padding-bottom: 12px;
-  margin-bottom: 12px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 .receipt-header h3 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: #000;
 }
@@ -1146,14 +1191,14 @@ input, select, textarea {
 }
 .receipt-divider {
   border-top: 1px dashed #000;
-  margin: 8px 0;
+  margin: 6px 0;
 }
 .receipt-total-row {
   display: flex;
   justify-content: space-between;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
-  margin: 8px 0;
+  margin: 6px 0;
 }
 
 /* Print Media */
@@ -1181,7 +1226,7 @@ input, select, textarea {
 /* Toast Notifications */
 .toast-container {
   position: fixed;
-  bottom: 24px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -1190,15 +1235,15 @@ input, select, textarea {
   z-index: 2000;
   pointer-events: none;
   width: 90%;
-  max-width: 420px;
+  max-width: 400px;
 }
 
 .toast {
   background: var(--ink);
   color: #FFFFFF;
-  padding: 12px 20px;
+  padding: 11px 16px;
   border-radius: var(--radius-md);
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   box-shadow: var(--shadow-lg);
   opacity: 0;
@@ -1219,20 +1264,20 @@ input, select, textarea {
 /* Empty state */
 .empty-state {
   text-align: center;
-  padding: 36px 16px;
+  padding: 32px 14px;
   color: var(--muted);
 }
 .empty-state-icon {
-  font-size: 36px;
-  margin-bottom: 10px;
+  font-size: 32px;
+  margin-bottom: 8px;
   opacity: 0.6;
 }
 
 /* ==============================================================================
-   RESPONSIVE BREAKPOINTS
+   RESPONSIVE BREAKPOINTS (Tablets, Large Phones, Small Phones)
    ============================================================================== */
 
-/* ---- Tablet & smaller desktop (max-width: 960px) ---- */
+/* ---- Tablet & Medium Screens (max-width: 960px) ---- */
 @media (max-width: 960px) {
   .pos-layout {
     grid-template-columns: 1fr;
@@ -1247,23 +1292,21 @@ input, select, textarea {
   }
 }
 
-/* ---- Charts collapse (max-width: 900px) ---- */
-@media (max-width: 900px) {
+/* ---- Charts Collapse (max-width: 860px) ---- */
+@media (max-width: 860px) {
   .charts-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* ---- Tablet breakpoint (max-width: 768px) ---- */
+/* ---- Tablet Navigation Breakpoint (max-width: 768px) ---- */
 @media (max-width: 768px) {
-  /* Show hamburger menu */
   .mobile-menu-btn {
     display: flex;
   }
 
-  /* Header adjustments */
   .app-header {
-    padding: 10px 16px 0;
+    padding: 10px 14px 0;
   }
 
   .brand-info h1 {
@@ -1271,7 +1314,7 @@ input, select, textarea {
   }
 
   .brand-info .tagline {
-    font-size: 9px;
+    font-size: 9.5px;
   }
 
   .brand-logo {
@@ -1280,24 +1323,31 @@ input, select, textarea {
     font-size: 17px;
   }
 
-  /* Hide user name on tablet, keep avatar */
+  /* Compact User Profile */
   .user-meta {
     display: none;
   }
 
   .user-badge {
-    padding: 4px;
+    padding: 3px;
   }
 
-  /* Nav tabs collapse to vertical dropdown */
+  /* Nav Tabs Dropdown Overlay */
   .nav-tabs {
     display: none;
     flex-direction: column;
-    gap: 0;
-    padding: 0;
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, var(--primary-dark) 0%, #052618 100%);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 1000;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 6px 0 14px;
+    animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .nav-tabs.mobile-open {
@@ -1307,24 +1357,31 @@ input, select, textarea {
   .nav-tab-btn {
     padding: 14px 18px;
     border-bottom: none;
-    border-left: 3px solid transparent;
+    border-left: 4px solid transparent;
     font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .nav-tab-btn:hover, .nav-tab-btn:active {
+    background: rgba(255, 255, 255, 0.08);
   }
 
   .nav-tab-btn.active {
     border-bottom: none;
     border-left-color: var(--accent);
     background: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
   }
 
-  /* Main content */
+  /* Main content padding */
   .app-main {
-    padding: 16px 14px 40px;
+    padding: 14px 12px 60px;
   }
 
-  /* Card */
   .card {
-    padding: 16px;
+    padding: 14px;
     border-radius: var(--radius-md);
   }
 
@@ -1338,99 +1395,67 @@ input, select, textarea {
     font-size: 15px;
   }
 
-  /* Metrics grid */
+  /* Metric cards 2 columns */
   .metrics-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
 
   .metric-card {
-    padding: 14px;
+    padding: 12px;
   }
 
   .metric-value {
-    font-size: 20px;
+    font-size: 19px;
   }
 
   .metric-title {
-    font-size: 10.5px;
+    font-size: 10px;
   }
 
   .metric-icon {
-    width: 30px;
-    height: 30px;
-    font-size: 15px;
-  }
-
-  /* POS Product Grid */
-  .pos-product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 10px;
-  }
-
-  .pos-item-card {
-    padding: 12px;
-  }
-
-  .pos-item-card .item-name {
-    font-size: 12.5px;
-    min-height: 32px;
-  }
-
-  .pos-item-card .item-price {
+    width: 28px;
+    height: 28px;
     font-size: 14px;
   }
 
-  /* Summary totals */
-  .summary-row.total {
-    font-size: 18px;
-  }
-
-  /* Modal - slide up from bottom on mobile */
+  /* Modal bottom-sheet style on mobile */
   .modal-overlay {
-    padding: 12px;
+    padding: 0;
     align-items: flex-end;
   }
 
   .modal-content {
-    max-height: 85vh;
+    max-height: 88vh;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    padding: 20px 16px;
+    padding: 20px 16px 28px;
+    width: 100%;
   }
 
-  /* Auth wrapper */
-  .auth-card {
-    padding: 28px 20px;
-  }
-
-  .auth-header h2 {
-    font-size: 20px;
-  }
-
-  /* Admin overview heading */
-  #view-admin-overview > div:first-child {
-    flex-direction: column;
-    align-items: flex-start;
+  /* Form responsive adjustments */
+  #productForm div[style*="grid-template-columns"],
+  .modal-content div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
   }
 }
 
-/* ---- Small mobile (max-width: 480px) ---- */
+/* ---- Small Smartphones (max-width: 480px) ---- */
 @media (max-width: 480px) {
   body {
-    font-size: 13.5px;
+    font-size: 13px;
   }
 
   .app-header {
-    padding: 8px 12px 0;
+    padding: 8px 10px 0;
   }
 
   .header-top {
-    gap: 8px;
+    gap: 6px;
     padding-bottom: 8px;
   }
 
   .brand-section {
-    gap: 8px;
+    gap: 6px;
   }
 
   .brand-logo {
@@ -1440,7 +1465,7 @@ input, select, textarea {
   }
 
   .brand-info h1 {
-    font-size: 13px;
+    font-size: 13.5px;
   }
 
   .brand-info .tagline {
@@ -1448,7 +1473,7 @@ input, select, textarea {
   }
 
   .header-actions {
-    gap: 6px;
+    gap: 4px;
   }
 
   .btn-header-icon {
@@ -1463,68 +1488,38 @@ input, select, textarea {
     font-size: 11px;
   }
 
-  /* Main content */
   .app-main {
-    padding: 12px 10px 32px;
+    padding: 10px 8px 60px;
   }
 
   .card {
-    padding: 14px 12px;
+    padding: 12px 10px;
   }
 
-  /* Metrics grid */
-  .metrics-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  .metric-card {
-    padding: 12px;
-    border-radius: var(--radius-md);
-  }
-
-  .metric-value {
-    font-size: 17px;
-  }
-
-  .metric-title {
-    font-size: 10px;
-  }
-
-  .metric-footer {
-    font-size: 10px;
-  }
-
-  .metric-icon {
-    width: 26px;
-    height: 26px;
-    font-size: 13px;
-  }
-
-  /* POS Product grid */
+  /* POS Product Grid 2-columns on small screens */
   .pos-product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
 
   .pos-item-card {
-    padding: 10px;
+    padding: 10px 8px;
   }
 
   .pos-item-card .item-name {
-    font-size: 12px;
+    font-size: 11.5px;
     min-height: 28px;
   }
 
   .pos-item-card .item-price {
-    font-size: 13px;
+    font-size: 13.5px;
   }
 
   .pos-item-card .item-cat {
     font-size: 9px;
   }
 
-  /* Cart adjustments - bigger touch targets */
+  /* Touch-friendly buttons in cart */
   .cart-qty-btn {
     width: 32px;
     height: 32px;
@@ -1537,71 +1532,81 @@ input, select, textarea {
 
   .cart-item-subtotal {
     font-size: 12px;
-    min-width: 55px;
+    min-width: 52px;
   }
 
   .summary-row.total {
     font-size: 16px;
   }
 
-  /* Payment method buttons */
+  /* Payment buttons */
   .payment-methods {
-    gap: 6px;
+    gap: 4px;
   }
 
   .pay-btn {
-    padding: 8px 4px;
-    font-size: 11px;
+    padding: 8px 2px;
+    font-size: 10.5px;
   }
 
-  /* Buttons */
   .btn {
-    padding: 8px 14px;
-    font-size: 13px;
+    padding: 8px 12px;
+    font-size: 12.5px;
   }
 
   .btn-lg {
-    padding: 12px 18px;
-    font-size: 14px;
+    padding: 12px 16px;
+    font-size: 13.5px;
   }
 
-  .btn-sm {
-    padding: 5px 10px;
-    font-size: 11.5px;
-  }
-
-  /* Search bar */
   .search-bar {
-    padding: 8px 12px;
+    padding: 8px 10px;
   }
 
   .search-bar input {
     font-size: 13px;
   }
 
-  /* Category pills */
   .cat-pill {
-    padding: 5px 12px;
+    padding: 5px 11px;
     font-size: 11px;
   }
 
-  /* Auth */
+  /* Auth wrapper on small screens */
   .auth-wrapper {
-    padding: 16px;
+    padding: 12px;
   }
 
   .auth-card {
-    padding: 24px 16px;
+    padding: 22px 16px;
   }
 
   .auth-icon {
-    width: 48px;
-    height: 48px;
-    font-size: 24px;
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
   }
 
   .auth-header h2 {
     font-size: 18px;
+  }
+
+  /* Metric cards */
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .metric-card {
+    padding: 10px;
+  }
+
+  .metric-value {
+    font-size: 16px;
+  }
+
+  .metric-title {
+    font-size: 9.5px;
   }
 
   /* Charts */
@@ -1613,52 +1618,23 @@ input, select, textarea {
     height: 180px;
   }
 
-  /* Modal */
-  .modal-content {
-    padding: 16px 14px;
-  }
-
-  .modal-header h3 {
-    font-size: 16px;
-  }
-
-  /* Receipt */
+  /* Receipts */
   .receipt-paper {
-    padding: 16px 14px;
-    font-size: 11px;
+    padding: 14px 10px;
+    font-size: 10.5px;
   }
 
   .receipt-header h3 {
-    font-size: 14px;
+    font-size: 13.5px;
   }
 
   .receipt-total-row {
-    font-size: 13px;
-  }
-
-  /* Tables */
-  .data-table {
-    font-size: 12px;
-  }
-
-  .data-table th {
-    padding: 8px 10px;
-    font-size: 10px;
-  }
-
-  .data-table td {
-    padding: 8px 10px;
-  }
-
-  /* Period selector buttons */
-  .period-btn {
-    padding: 4px 8px !important;
-    font-size: 11px !important;
-  }
-
-  /* Toast */
-  .toast {
-    padding: 10px 14px;
     font-size: 12.5px;
+  }
+
+  /* Period buttons in Admin Overview */
+  .period-btn {
+    padding: 4px 7px !important;
+    font-size: 11px !important;
   }
 }

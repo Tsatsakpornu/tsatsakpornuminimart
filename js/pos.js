@@ -193,11 +193,15 @@ class PosService {
     const receiptHtml = `
       <div class="receipt-paper">
         <div class="receipt-header">
+          <div style="margin-bottom:6px; display:flex; justify-content:center;">
+            <img src="assets/logo.jpg" alt="Logo" style="width:44px; height:44px; border-radius:50%; object-fit:cover; border:1px solid #ddd;">
+          </div>
           <h3>TSATSAKPORNU</h3>
-          <div style="font-size: 11px; margin-top: 2px;">Premium Quality Retail & Provisions</div>
-          <div style="font-size: 10.5px; margin-top: 4px;">Hohoe, Ghana · Tel: 0244270887</div>
-          <div style="font-size: 10px; margin-top: 6px; color: #555;">Receipt: #${sale.id.slice(-8).toUpperCase()}</div>
-          <div style="font-size: 10px;">Date: ${new Date(sale.created_at).toLocaleString()}</div>
+          <div style="font-size: 11px; margin-top: 2px; font-weight:600;">Trading Enterprise</div>
+          <div style="font-size: 10px; margin-top: 3px; color: #444;">Retail, Provisions & Wholesale</div>
+          <div style="font-size: 10px; margin-top: 2px; color: #555;">Hohoe, Ghana · Tel: 0244270887</div>
+          <div style="font-size: 9.5px; margin-top: 6px; color: #555;">Receipt: #${sale.id.slice(-8).toUpperCase()}</div>
+          <div style="font-size: 9.5px;">Date: ${new Date(sale.created_at).toLocaleString()}</div>
         </div>
 
         <div style="margin-bottom: 8px; font-size: 11px;">

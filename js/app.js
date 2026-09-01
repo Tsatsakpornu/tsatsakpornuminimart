@@ -154,9 +154,12 @@ class AppController {
 
     container.innerHTML = `
       <div class="auth-header">
-        <div class="auth-icon">🏪</div>
-        <h2>Sign In to TSATSAKPORNU</h2>
-        <p>Enter your credentials to access your terminal</p>
+        <div class="auth-logo-wrap">
+          <img src="assets/logo.jpg" alt="Tsatsakpornu Logo" class="auth-logo-img">
+        </div>
+        <h2>TSATSAKPORNU</h2>
+        <div class="tagline" style="font-size:12px; color:var(--muted); font-weight:600; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.04em;">Trading Enterprise</div>
+        <p style="margin-top:2px;">Sign in to access your POS & Management terminal</p>
       </div>
 
       <form id="authForm" onsubmit="return window.app.handleAuthSubmit(event)">

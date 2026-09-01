@@ -8,6 +8,7 @@ class AppController {
     this.currentView = 'pos';
     this.authMode = 'signin'; // 'signin' or 'signup'
     this.authSelectedRole = 'salesperson'; // 'salesperson' or 'admin'
+    this.mobileNavOpen = false;
   }
 
   async init() {
@@ -57,7 +58,7 @@ class AppController {
 
     if (!user) {
       // Show Auth Screen
-      if (authWrapper) authWrapper.style.display = 'block';
+      if (authWrapper) authWrapper.style.display = 'flex';
       if (appHeader) appHeader.style.display = 'none';
       if (appMain) appMain.style.display = 'none';
       this.renderAuthScreen();
@@ -71,7 +72,10 @@ class AppController {
 
     // Populate user profile in header
     if (userName) userName.textContent = user.full_name || user.email;
-    if (userRole) userRole.textContent = user.role.toUpperCase();
+    if (userRole) {
+      userRole.textContent = user.role.toUpperCase();
+      userRole.className = 'user-role-tag' + (user.role === 'admin' ? ' role-admin' : ' role-sales');
+    }
     if (userAvatar) userAvatar.textContent = (user.full_name || user.email).slice(0, 1).toUpperCase();
 
     // Toggle navigation tab visibility based on Role
@@ -86,6 +90,10 @@ class AppController {
     } else {
       this.navigate('pos');
     }
+
+    // Close mobile nav if open
+    this.mobileNavOpen = false;
+    this.updateMobileNav();
 
     // Refresh data
     window.posService.init();
@@ -106,6 +114,10 @@ class AppController {
     document.querySelectorAll('.view-panel').forEach(panel => {
       panel.classList.toggle('active', panel.id === `view-${viewId}`);
     });
+
+    // Close mobile nav after navigating
+    this.mobileNavOpen = false;
+    this.updateMobileNav();
 
     // Render corresponding view
     if (viewId === 'pos') {
@@ -183,9 +195,31 @@ class AppController {
     return false;
   }
 
+  demoLogin(roleType, personIndex) {
+    const user = window.authService.demoLogin(roleType, personIndex);
+    this.showToast(`Welcome, ${user.full_name}! Logged in as ${user.role.toUpperCase()}`, 'success');
+  }
+
   logout() {
     window.authService.signOut();
     this.showToast('You have been logged out', 'info');
+  }
+
+  /* ================= MOBILE NAV TOGGLE ================= */
+  toggleMobileNav() {
+    this.mobileNavOpen = !this.mobileNavOpen;
+    this.updateMobileNav();
+  }
+
+  updateMobileNav() {
+    const navTabs = document.getElementById('navTabs');
+    const hamburger = document.getElementById('mobileMenuBtn');
+    if (navTabs) {
+      navTabs.classList.toggle('mobile-open', this.mobileNavOpen);
+    }
+    if (hamburger) {
+      hamburger.classList.toggle('active', this.mobileNavOpen);
+    }
   }
 
   /* ================= SUPABASE CONFIG MODAL ================= */

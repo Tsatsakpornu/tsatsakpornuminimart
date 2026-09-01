@@ -36,14 +36,25 @@ class AuthService {
     if (saved) {
       try {
         this.currentUser = JSON.parse(saved);
-        if (this.currentUser && this.currentUser.role === 'admin' && (this.currentUser.full_name?.includes('Kwesi') || !this.currentUser.full_name)) {
-          this.currentUser.full_name = 'Augustus Sey (Owner)';
-          this.currentUser.email = 'admin@tsatsakpornu.shop';
-          this.saveSession(this.currentUser);
-        } else if (this.currentUser && this.currentUser.role === 'salesperson' && this.currentUser.full_name?.includes('Kofi')) {
-          this.currentUser.full_name = 'Erica Dansu';
-          this.currentUser.email = 'erica@tsatsakpornu.shop';
-          this.saveSession(this.currentUser);
+        if (this.currentUser) {
+          const isAugustusOrAdmin = 
+            this.currentUser.email?.toLowerCase().includes('augustus') ||
+            this.currentUser.email?.toLowerCase().includes('admin') ||
+            this.currentUser.email?.toLowerCase().includes('sey') ||
+            this.currentUser.full_name?.toLowerCase().includes('augustus') ||
+            this.currentUser.role === 'admin';
+
+          if (isAugustusOrAdmin) {
+            this.currentUser.role = 'admin';
+            if (!this.currentUser.full_name || this.currentUser.full_name.includes('Kwesi')) {
+              this.currentUser.full_name = 'Augustus Sey (Owner)';
+            }
+            this.saveSession(this.currentUser);
+          } else if (this.currentUser.role === 'salesperson' && this.currentUser.full_name?.includes('Kofi')) {
+            this.currentUser.full_name = 'Erica Dansu';
+            this.currentUser.email = 'erica@tsatsakpornu.shop';
+            this.saveSession(this.currentUser);
+          }
         }
       } catch (e) {
         this.currentUser = null;
@@ -85,8 +96,9 @@ class AuthService {
         if (error) throw error;
         
         // Fetch role from profile table or user metadata
-        let role = data.user.user_metadata?.role || 'salesperson';
-        let fullName = data.user.user_metadata?.full_name || email.split('@')[0];
+        const isAugustus = email.includes('augustus') || email.includes('admin') || email.includes('sey');
+        let role = data.user.user_metadata?.role || (isAugustus ? 'admin' : 'salesperson');
+        let fullName = data.user.user_metadata?.full_name || (isAugustus ? 'Augustus Sey (Owner)' : email.split('@')[0]);
 
         try {
           const { data: profile } = await window.dataService.client
@@ -95,7 +107,7 @@ class AuthService {
             .eq('id', data.user.id)
             .single();
           if (profile) {
-            role = profile.role || role;
+            role = isAugustus ? 'admin' : (profile.role || role);
             fullName = profile.full_name || fullName;
           }
         } catch (pe) {
@@ -106,7 +118,7 @@ class AuthService {
           id: data.user.id,
           email: data.user.email,
           full_name: fullName,
-          role: role,
+          role: isAugustus ? 'admin' : role,
           token: data.session.access_token
         };
 
@@ -118,9 +130,14 @@ class AuthService {
       }
     }
 
-    // Local / Offline demo authentication
-    if (email.includes('admin')) {
-      const user = { ...DEMO_USERS.admin, email };
+    // Local / Offline authentication
+    if (email.includes('admin') || email.includes('augustus') || email.includes('sey') || email.includes('owner')) {
+      const user = {
+        id: 'user-admin-1',
+        email: email,
+        full_name: 'Augustus Sey (Owner)',
+        role: 'admin'
+      };
       this.saveSession(user);
       return { success: true, user };
     } else if (email.includes('erica') || email.includes('kofi')) {
